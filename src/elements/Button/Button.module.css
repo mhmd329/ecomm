@@ -1,5 +1,15 @@
-.logout{
-background-color: rgb(49, 222, 187);
-border: none;
-padding: 3px;
-} 
+.logout {
+  background-color: rgb(49, 222, 187);
+  border: none;
+  padding: 7px;
+  cursor: pointer;
+  font-size: 10px;
+  transition: 0.3s;
+}
+.logout:hover {
+  background-color: #c8f7c4;
+  color: var(--color-primary);
+  font-size: 14px;
+  border: var(--color-primary) 3px solid;
+  border-radius: 10px;
+}
