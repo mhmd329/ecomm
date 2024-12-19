@@ -2,7 +2,7 @@
 import { useContext } from "react";
 import styles from "./Darkmode.module.css";
 import { ThemeContext } from "@/context/ThemeContext";
-export default function DarkMode() {
+function DarkMod() {
   const { mode, toggle } = useContext(ThemeContext);
   return (
     <div className={styles.container} onClick={toggle}>
@@ -15,3 +15,4 @@ export default function DarkMode() {
     </div>
   );
 }
+export default DarkMod
