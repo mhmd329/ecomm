@@ -3,25 +3,40 @@ import family from "@/images/family.png";
 import Image from "next/image";
 import styles from "./blog.module.css";
 import React from "react";
-const Blog = () => {
+
+async function getData() {
+  const res = await fetch("https://dummyjson.com/products/");
+  if (!res.ok) {
+    throw new Error("failed to fetch data");
+  }
+  return res.json();
+}
+
+export default async function Blog() {
+  const data = await getData();
+  const products = data.products;
+
   return (
     <div className={styles.mainContainer}>
-      <Link href="Blog/id" className={styles.post}>
-        <div className={styles.imageContainer}>
-          <Image
-            className={styles.image}
-            src={family}
-            width={350}
-            height={250}
-            alt="post image"
-          />
-        </div>
-        <div className={styles.content}>
-          <h1 className={styles.title}>post title</h1>
-          <p className={styles.text}>post text</p>
-        </div>
-      </Link>
+      {products.map((product) => (
+        <Link
+          href={`/Blog/${product.id}`}
+          className={styles.post}
+          key={product.id}
+        >
+          <div className={styles.imageContainer}>
+            <img
+              className={styles.image}
+              src={product.thumbnail}
+              alt="post image"
+            />
+          </div>
+          <div className={styles.content}>
+            <h1 className={styles.title}>{product.title}</h1>
+            <p className={styles.text}>{product.description}</p>
+          </div>
+        </Link>
+      ))}
     </div>
   );
-};
-export default Blog;
+}
